@@ -68,7 +68,15 @@ namespace WpfMVVMApplication.ViewModels
             JsonDataContext.GetInstance().DEPARTMENTS_LINK = DepDest;
             JsonDataContext.GetInstance().ROLES_LINK= RolesDestination;
             JsonDataContext.GetInstance().SerializeConfig();
-            JsonDataContext.GetInstance().InitJsonDatabase();
+            try
+            {
+                JsonDataContext.GetInstance().InitJsonDatabase();
+            }
+            catch(Exception ex) 
+            {
+                _msgBoxService.Show("Неверная конфигурация. Смените конфигурационные настройки. "+ ex.Message);
+                return;
+            }
             _msgBoxService.Show("Конфигурационные данные сохранены");
         }
     }
