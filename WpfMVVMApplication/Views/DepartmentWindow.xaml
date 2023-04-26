@@ -1,0 +1,91 @@
+﻿<Window x:Class="WpfMVVMApplication.Views.DepartmentWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfMVVMApplication.Views"
+        mc:Ignorable="d"
+        xmlns:prism="http://prismlibrary.com/" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        WindowStartupLocation="CenterScreen"
+        Title="Окно Отдела" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel
+            Grid.Row="1"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            >
+            <TextBlock>Название отдела</TextBlock>
+            <TextBox
+                Text="{Binding Department.Name}"
+                ></TextBox>
+            <TextBlock>Список офисов (для изменения вводите через запятую)</TextBlock>
+            <TextBox
+                Text="{Binding Offices}"
+                ></TextBox>
+            <Button
+                Command="{Binding Save}"
+                >Сохранить</Button>
+        </StackPanel>
+        <ListView 
+            Grid.ColumnSpan="2"
+    ItemsSource="{Binding Employees, Mode=TwoWay}"
+    x:Name="usersListView"
+    Grid.Row="0" >
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction 
+                CommandParameter="{Binding ElementName=usersListView, Path=SelectedItem}"
+                Command="{Binding SelectionChanged}"
+            />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <ListView.View>
+                <GridView>
+                    
+                   
+
+                    <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}" />
+                    <GridViewColumn Header="Имя" DisplayMemberBinding="{Binding FirstName}" />
+                    <GridViewColumn Header="Фамилия" DisplayMemberBinding="{Binding LastName}" />
+                    <GridViewColumn Header="Должность" DisplayMemberBinding="{Binding Position.Name}" />
+                    <GridViewColumn Header="Зарплата" DisplayMemberBinding="{Binding Salary}" />
+                    <GridViewColumn Header="Отдел" DisplayMemberBinding="{Binding Department.Name}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <ListView 
+            Grid.Column="2"
+    ItemsSource="{Binding ChoosedEmployees, Mode=TwoWay}"
+    x:Name="usersToAddListView"
+    Grid.Row="1" >
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction 
+                CommandParameter="{Binding ElementName=usersToAddListView, Path=SelectedItem}"
+                Command="{Binding SelectionChangedToRemove}"
+            />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <ListView.View>
+                <GridView>
+
+                   
+
+                   
+                    <GridViewColumn Header="Имя" DisplayMemberBinding="{Binding FirstName}" />
+                    <GridViewColumn Header="Фамилия" DisplayMemberBinding="{Binding LastName}" />
+                    
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</Window>

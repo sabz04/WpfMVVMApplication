@@ -1,0 +1,44 @@
+﻿<Window x:Class="WpfMVVMApplication.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfMVVMApplication.Views"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        xmlns:prism="http://prismlibrary.com/" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="Главное окно" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="57*"/>
+            <RowDefinition Height="348*"/>
+            
+        </Grid.RowDefinitions>
+        <Grid
+            
+            >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                
+            </Grid.ColumnDefinitions>
+            <Button
+                Margin="5"
+                Grid.Column="1"
+                Command="{Binding DepsButtonClick}"
+                >Отделы</Button>
+            <Button
+                Margin="5"
+                Grid.Column="2"
+                Command="{Binding UsersButtonClick}"
+                >Пользователи</Button>
+            </Grid>
+        <Frame
+            Grid.Row="1"
+            NavigationUIVisibility="Hidden"
+            Content="{Binding CurrentPage}"
+            ></Frame>
+    </Grid>
+</Window>

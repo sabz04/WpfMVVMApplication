@@ -1,0 +1,32 @@
+﻿<Window x:Class="WpfMVVMApplication.Views.DepartmentCreateWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfMVVMApplication.Views"
+        mc:Ignorable="d"
+        xmlns:prism="http://prismlibrary.com/" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        WindowStartupLocation="CenterScreen"
+        Title="Создание Отдела" Height="450" Width="500">
+    <Grid>
+
+        <StackPanel
+            Grid.Row="1"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            >
+            <TextBlock>Название отдела</TextBlock>
+            <TextBox
+                Text="{Binding DepName}"
+                ></TextBox>
+            <TextBlock>Список офисов</TextBlock>
+            <TextBox
+                Text="{Binding Offices}"
+                ></TextBox>
+            <Button
+                Command="{Binding Save}"
+                >Создать</Button>
+        </StackPanel>
+    </Grid>
+</Window>
